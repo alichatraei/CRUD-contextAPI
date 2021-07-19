@@ -9,7 +9,6 @@ export interface IState {
   }>;
 }
 export type TState = { id: string; todo: string }[];
-
 const initialData: IState = {
   todoLists: [
     {
