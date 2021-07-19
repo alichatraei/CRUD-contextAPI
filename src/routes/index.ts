@@ -1,18 +1,20 @@
+import { Home, AddUser, EditUser } from "../pages";
 import { TRoutes } from "../types";
 const Routes: TRoutes = [
   {
     path: "/",
     exact: true,
-    page: "Home",
+    page: Home,
   },
   {
     path: "/adduser",
-    page: "AddUser",
+    exact: true,
+    page: AddUser,
   },
   {
     path: "/edit/:id",
     exact: true,
-    page: "EditUser",
+    page: EditUser,
   },
 ];
 export default Routes;
