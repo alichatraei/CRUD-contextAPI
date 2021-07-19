@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import SearchInput from "../SearchInput/SearchInput";
 import "./Header.styles.css";
 const Header = () => {
@@ -17,7 +18,9 @@ const Header = () => {
           </Col>
           <Col className="text-center">
             <div className="btnAddNote">
-              <Button variant="success">Add Note</Button>
+              <Link className="btn btn-success" to="/adduser">
+                Add note
+              </Link>
             </div>
           </Col>
         </Row>
