@@ -7,8 +7,13 @@ export interface IState {
     type: any;
     payload: any;
   }>;
+  filterdListsText: string;
 }
-export type TState = { id: string; todo: string }[];
+export type TState = {
+  todoLists: { id: string; todo: string }[];
+  filterdListsText: string;
+};
+
 const initialData: IState = {
   todoLists: [
     {
@@ -17,21 +22,29 @@ const initialData: IState = {
     },
   ],
   dispatch() {},
+  filterdListsText: "",
 };
 
 export const todoContext = createContext<IState>({
   todoLists: [],
   dispatch() {},
+  filterdListsText: "",
 });
 const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer<React.Reducer<TState, any>>(
     TodoReducer,
-    initialData.todoLists
+    { todoLists: initialData.todoLists, filterdListsText: "" }
   );
   return (
-    <todoContext.Provider value={{ todoLists: state, dispatch }}>
+    <todoContext.Provider
+      value={{
+        todoLists: state.todoLists,
+        dispatch,
+        filterdListsText: state.filterdListsText,
+      }}
+    >
       {children}
     </todoContext.Provider>
   );

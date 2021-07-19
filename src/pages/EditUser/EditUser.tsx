@@ -6,11 +6,14 @@ type TState = { id: string; todo: string } | undefined;
 const EditUser = () => {
   const { todoLists, dispatch } = React.useContext(todoContext);
   const { id } = useParams<{ id: string }>();
-  const [editableTodo, setٍEditableTodo] = React.useState<TState>();
-  const [newTodoValue, setNewTodoValue] = React.useState<string>("");
+  const [editableTodo, setEditableTodo] = React.useState<TState>();
+  const [newTodoValue, setNewTodoValue] = React.useState<string | undefined>(
+    ""
+  );
   React.useEffect(() => {
     const editTodo: TState = todoLists.find((item) => item.id === id);
-    setٍEditableTodo(editTodo);
+    setEditableTodo(editTodo);
+    setNewTodoValue(editTodo?.todo);
   }, [id]);
   const history = useHistory();
   const handleOnSubmit = (e: React.FormEvent) => {

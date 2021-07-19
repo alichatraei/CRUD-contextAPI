@@ -1,26 +1,41 @@
 import { TState } from "../provider/TodoProvider";
-type editType = {
+type TEditType = {
   type: string;
-  payload: { id: string; todo: string };
+  payload: { id: string; todo: string | "" };
 };
-type addType = {
+type TAddType = {
   type: string;
-  payload: { id: string; todo: string };
+  payload: { id: string; todo: string | "" };
 };
-type TAction = editType | addType;
+
+type TAction = TEditType | TAddType;
 const TodoReducer = (state: TState, action: TAction): TState => {
   switch (action.type) {
     case "ADD_TODO":
-      return [...state, action.payload];
+      return { ...state, todoLists: [...state.todoLists, action.payload] };
     case "EDIT_TODO":
-      return state.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, todo: action.payload.todo }
-          : item
-      );
-
+      return {
+        ...state,
+        todoLists: state.todoLists.map((item) =>
+          item.id === action.payload.id
+            ? { ...item, todo: action.payload.todo }
+            : item
+        ),
+      };
+    case "DELETE_TODO":
+      return {
+        ...state,
+        todoLists: state.todoLists.filter(
+          (item) => item.id !== action.payload.id
+        ),
+      };
+    case "SEARCH_TODO":
+      return {
+        ...state,
+        filterdListsText: action.payload.todo,
+      };
     default:
-      return [...state];
+      return state;
   }
 };
 export default TodoReducer;
