@@ -12,7 +12,9 @@ const TableContainer = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <TableItem />
+        <tbody>
+          <TableItem />
+        </tbody>
       </Table>
     </div>
   );

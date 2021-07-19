@@ -1,39 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { todoContext } from "../../provider/TodoProvider";
 
 const TableItem = () => {
+  const { todoLists } = useContext(todoContext);
   return (
     <>
-      <tbody>
-        <tr>
-          <td>Do homework</td>
-          <td>
-            <Link to="/edit/1" className="btn btn-warning">
-              Edit
-            </Link>
-            <Button className="btn btn-danger mx-3">Delete</Button>
-          </td>
-        </tr>
-        <tr className="text-center">
-          <td>Do homework</td>
-          <td>
-            <Link to="/edit/1" className="btn btn-warning">
-              Edit
-            </Link>
-            <Button className="btn btn-danger mx-3">Delete</Button>
-          </td>
-        </tr>
-        <tr>
-          <td>Do homework</td>
-          <td>
-            <Link to="/edit/1" className="btn btn-warning">
-              Edit
-            </Link>
-            <Button className="btn btn-danger mx-3">Delete</Button>
-          </td>
-        </tr>
-      </tbody>
+      {todoLists.map((item) => {
+        return (
+          <tr key={item.id}>
+            <td>{item.todo}</td>
+            <td>
+              <Link to={`/edit/${item.id}`} className="btn btn-warning">
+                Edit
+              </Link>
+              <Button className="btn btn-danger mx-3">Delete</Button>
+            </td>
+          </tr>
+        );
+      })}
     </>
   );
 };
