@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { todoContext } from "../../provider/TodoProvider";
-type TState = { id: string; todo: string } | undefined;
+type TState = { id: string; todo: string; priority: string } | undefined;
 const EditUser = () => {
   const { todoLists, dispatch } = React.useContext(todoContext);
   const { id } = useParams<{ id: string }>();
@@ -10,15 +10,21 @@ const EditUser = () => {
   const [newTodoValue, setNewTodoValue] = React.useState<string | undefined>(
     ""
   );
+  const [priority, setPriority] = React.useState<string | undefined>("");
+
   React.useEffect(() => {
     const editTodo: TState = todoLists.find((item) => item.id === id);
     setEditableTodo(editTodo);
     setNewTodoValue(editTodo?.todo);
+    setPriority(editTodo?.priority);
   }, [id]);
   const history = useHistory();
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch({ type: "EDIT_TODO", payload: { id, todo: newTodoValue } });
+    dispatch({
+      type: "EDIT_TODO",
+      payload: { id, todo: newTodoValue, priority },
+    });
     history.push("/");
   };
   return (
@@ -39,6 +45,19 @@ const EditUser = () => {
               onChange={(e) => setNewTodoValue(e.target.value)}
             />
           </Form.Group>
+          <div className="inputSearch text-center mb-3">
+            <select
+              name="filter"
+              id="filter"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+            >
+              <option value="all">All</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
           <Button variant="primary" type="submit">
             Add
           </Button>

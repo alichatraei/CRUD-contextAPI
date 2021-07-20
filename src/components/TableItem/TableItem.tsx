@@ -9,7 +9,6 @@ const TableItem = () => {
   const handleDelete = (id: string) => {
     dispatch({ type: "DELETE_TODO", payload: { id } });
   };
-  console.log(currentLists);
   return (
     <>
       {currentLists.length > 0 ? (
@@ -64,7 +63,7 @@ const TableItem = () => {
           })
       ) : (
         <tr>
-          <td colSpan={2} className="text-center">
+          <td colSpan={3} className="text-center">
             Nothing to show :/
           </td>
         </tr>

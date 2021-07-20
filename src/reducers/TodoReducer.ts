@@ -18,7 +18,11 @@ const TodoReducer = (state: TState, action: TAction): TState => {
         ...state,
         todoLists: state.todoLists.map((item) =>
           item.id === action.payload.id
-            ? { ...item, todo: action.payload.todo }
+            ? {
+                ...item,
+                todo: action.payload.todo,
+                priority: action.payload.priority,
+              }
             : item
         ),
       };
