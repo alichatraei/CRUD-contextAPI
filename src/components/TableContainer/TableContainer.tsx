@@ -9,6 +9,7 @@ const TableContainer = () => {
         <thead>
           <tr>
             <th>Todo</th>
+            <th>Priority</th>
             <th>Actions</th>
           </tr>
         </thead>

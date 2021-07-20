@@ -1,11 +1,11 @@
 import { TState } from "../provider/TodoProvider";
 type TEditType = {
   type: string;
-  payload: { id: string; todo: string | "" };
+  payload: { id: string; todo: string | ""; priority: string };
 };
 type TAddType = {
   type: string;
-  payload: { id: string; todo: string | "" };
+  payload: { id: string; todo: string | ""; priority: string };
 };
 
 type TAction = TEditType | TAddType;
@@ -34,6 +34,34 @@ const TodoReducer = (state: TState, action: TAction): TState => {
         ...state,
         filterdListsText: action.payload.todo,
       };
+    case "PRIORITY_FILTER":
+      // const newDataList = null;
+      switch (action.payload.priority) {
+        case "all":
+          return { ...state, currentLists: state.todoLists };
+        case "low":
+          return {
+            ...state,
+            currentLists: state.todoLists.filter(
+              (item) => item.priority === action.payload.priority
+            ),
+          };
+        case "medium":
+          return {
+            ...state,
+            currentLists: state.todoLists.filter(
+              (item) => item.priority === action.payload.priority
+            ),
+          };
+        case "high":
+          return {
+            ...state,
+            currentLists: state.todoLists.filter(
+              (item) => item.priority === action.payload.priority
+            ),
+          };
+      }
+      return { ...state };
     default:
       return state;
   }

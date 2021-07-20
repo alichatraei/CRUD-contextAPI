@@ -4,3 +4,8 @@
   min-height: 8rem;
   background-color: rgb(197, 109, 197);
 }
+.inputSearch select {
+  padding: 0.4rem 0;
+  outline: none;
+  border-radius: 0.5rem;
+}
